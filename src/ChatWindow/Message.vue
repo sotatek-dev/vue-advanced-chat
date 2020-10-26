@@ -122,7 +122,8 @@
 						<div class="icon-edited" v-if="message.edited && !message.deleted">
 							<svg-icon name="pencil" />
 						</div>
-						<span>{{ message.timestamp }}</span>
+						<div v-if="message.admin_name">{{ message.admin_name }}</div>
+						<div>{{ message.timestamp }}</div>
 						<span v-if="isMessageSeen">
 							<svg-icon name="checkmark" class="icon-check" />
 						</span>
@@ -570,6 +571,10 @@ export default {
 
 .message-current {
 	background: var(--chat-message-bg-color-me) !important;
+	.text-timestamp {
+		display: flex;
+		justify-content: space-between;
+	}
 }
 
 .message-deleted {
