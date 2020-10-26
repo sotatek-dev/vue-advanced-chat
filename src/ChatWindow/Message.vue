@@ -553,8 +553,7 @@ export default {
 	color: var(--chat-message-color);
 	border-radius: 8px;
 	font-size: 14px;
-	padding: 6px 9px 3px;
-	white-space: pre-wrap;
+	padding: 6px 9px 5px;
 	max-width: 100%;
 	-webkit-transition-property: box-shadow, opacity;
 	transition-property: box-shadow, opacity;
