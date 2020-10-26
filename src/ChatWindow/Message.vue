@@ -122,7 +122,7 @@
 						<div class="icon-edited" v-if="message.edited && !message.deleted">
 							<svg-icon name="pencil" />
 						</div>
-						<div v-if="message.admin_name">{{ message.admin_name }}</div>
+						<div v-if="message.admin_name" style="padding-right: 10px;">{{ message.admin_name }}</div>
 						<div>{{ message.timestamp }}</div>
 						<span v-if="isMessageSeen">
 							<svg-icon name="checkmark" class="icon-check" />
