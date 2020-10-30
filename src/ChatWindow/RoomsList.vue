@@ -60,6 +60,10 @@
 						:class="{ 'message-new': room.lastMessage.new }"
 						v-if="room.lastMessage"
 					>
+						<div style="padding-right: 5px;" v-if="room.lastMessage.sender_id === 'ADMIN_VCC'">
+							{{room.lastMessage.username}}:
+						</div>
+
 						<span v-if="room.lastMessage.seen">
 							<svg-icon name="checkmark" class="icon-check" />
 						</span>
