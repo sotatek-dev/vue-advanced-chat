@@ -13,6 +13,7 @@
 				:textFormatting="textFormatting"
 				:isMobile="isMobile"
 				@fetchRoom="fetchRoom"
+				@searchRoom="searchRoom"
 				@addRoom="addRoom"
 			>
 				<template v-slot:rooms-header>
@@ -191,6 +192,9 @@ export default {
 	},
 
 	methods: {
+		searchRoom(searchKey) {
+			this.$emit('searchRoom', searchKey)
+		},
 		updateResponsive() {
 			this.isMobile = window.innerWidth < this.responsiveBreakpoint
 		},

@@ -14,7 +14,8 @@
 				type="search"
 				:placeholder="textMessages.SEARCH"
 				autocomplete="off"
-				@input="searchRoom"
+				@keyup.enter="searchRoom"
+				v-model="searchKey"
 				v-show="rooms.length"
 			/>
 			<div v-if="showAddRoom" class="svg-button add-icon" @click="addRoom">
@@ -107,7 +108,8 @@ export default {
 	data() {
 		return {
 			filteredRooms: this.rooms || [],
-			selectedRoomId: ''
+			selectedRoomId: '',
+			searchKey: ''
 		}
 	},
 
@@ -121,12 +123,8 @@ export default {
 	},
 
 	methods: {
-		searchRoom(ev) {
-			this.filteredRooms = filteredUsers(
-				this.rooms,
-				'roomName',
-				ev.target.value
-			)
+		searchRoom() {
+			this.$emit('searchRoom', this.searchKey);
 		},
 		openRoom(room) {
 			if (room.roomId === this.room.roomId && !this.isMobile) return
