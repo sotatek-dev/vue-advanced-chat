@@ -13,6 +13,7 @@
 				:textFormatting="textFormatting"
 				:isMobile="isMobile"
 				@fetchRoom="fetchRoom"
+				@fetchRooms="fetchRooms"
 				@searchRoom="searchRoom"
 				@addRoom="addRoom"
 			>
@@ -192,6 +193,9 @@ export default {
 	},
 
 	methods: {
+		fetchRooms() {
+			this.$emit('fetchRooms');
+		},
 		searchRoom(searchKey) {
 			this.$emit('searchRoom', searchKey)
 		},

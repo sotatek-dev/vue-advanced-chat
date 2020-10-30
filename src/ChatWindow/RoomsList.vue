@@ -6,20 +6,25 @@
 	>
 		<slot name="rooms-header"></slot>
 
-		<div class="box-search">
-			<div class="icon-search" v-if="rooms.length">
-				<svg-icon name="search" />
-			</div>
-			<input
-				type="search"
-				:placeholder="textMessages.SEARCH"
-				autocomplete="off"
-				@keyup.enter="searchRoom"
-				v-model="searchKey"
-				v-show="rooms.length"
-			/>
-			<div v-if="showAddRoom" class="svg-button add-icon" @click="addRoom">
-				<svg-icon name="add" />
+		<div class="search-container">
+      <div class="btn-get-room">
+        <button @click="fetchRooms" class="btn btn-success" :disabled="isDisableLoadMore">Load more</button>
+      </div>
+
+			<div class="box-search">
+				<div class="icon-search" v-if="rooms.length">
+					<svg-icon name="search" />
+				</div>
+				<input
+					type="search"
+					:placeholder="textMessages.SEARCH"
+					autocomplete="off"
+					@keyup.enter="searchRoom"
+					v-model="searchKey"
+				/>
+				<div v-if="showAddRoom" class="svg-button add-icon" @click="addRoom">
+					<svg-icon name="add" />
+				</div>
 			</div>
 		</div>
 
@@ -109,7 +114,8 @@ export default {
 		return {
 			filteredRooms: this.rooms || [],
 			selectedRoomId: '',
-			searchKey: ''
+			searchKey: '',
+			isDisableLoadMore: false
 		}
 	},
 
@@ -119,10 +125,22 @@ export default {
 		},
 		room(val) {
 			if (val) this.selectedRoomId = val.roomId
+		},
+		searchKey(val) {
+			if (!val) {
+				this.isDisableLoadMore = false;
+				this.searchRoom();
+				return;
+			}
+
+			this.isDisableLoadMore = true;
 		}
 	},
 
 	methods: {
+		fetchRooms() {
+			this.$emit('fetchRooms');
+		},
 		searchRoom() {
 			this.$emit('searchRoom', this.searchKey);
 		},
@@ -165,6 +183,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.search-container {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #444;
+	padding: 0 15px;
+}
 .rooms-container {
 	display: flex;
 	flex-flow: column;
