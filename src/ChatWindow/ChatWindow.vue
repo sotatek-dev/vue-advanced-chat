@@ -283,7 +283,7 @@ a {
 }
 
 .chat-container {
-	height: 100%;
+	height: 95%;
 	display: flex;
 
 	textarea,
