@@ -111,17 +111,20 @@ export default {
 	},
 
 	watch: {
-		rooms(newVal, oldVal) {
-			if (newVal[0] && newVal.length !== oldVal.length) {
-				if (this.roomId) {
-					const room = newVal.find(r => r.roomId === this.roomId)
-					this.fetchRoom({ room })
-				} else if (!this.isMobile) {
-					this.fetchRoom({ room: this.orderedRooms[0] })
-				} else {
-					this.showRoomsList = true
+		rooms: {
+			handler(newVal, oldVal) {
+				if (newVal[0] && newVal.length !== oldVal.length) {
+					if (this.roomId) {
+						const room = newVal.find(r => r.roomId === this.roomId)
+						this.fetchRoom({ room })
+					} else if (!this.isMobile) {
+						this.fetchRoom({ room: this.orderedRooms[0] })
+					} else {
+						this.showRoomsList = true
+					}
 				}
-			}
+			},
+			deep: true
 		},
 
 		roomId: {
