@@ -111,8 +111,7 @@ export default {
 	},
 
 	watch: {
-		rooms: {
-			handler(newVal, oldVal) {
+		rooms(newVal, oldVal) {
 				if (newVal[0] && newVal.length !== oldVal.length) {
 					if (this.roomId) {
 						const room = newVal.find(r => r.roomId === this.roomId)
@@ -124,8 +123,6 @@ export default {
 					}
 				}
 			},
-			deep: true
-		},
 
 		roomId: {
 			immediate: true,
