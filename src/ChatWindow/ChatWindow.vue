@@ -51,6 +51,7 @@
 				@messageActionHandler="messageActionHandler"
 				@sendMessageReaction="sendMessageReaction"
 				@typingMessage="typingMessage"
+				@onFocusChat="onFocusChat"
 			>
 			</room>
 		</div>
@@ -198,6 +199,9 @@ export default {
 		},
 		searchRoom(searchKey) {
 			this.$emit('searchRoom', searchKey)
+		},
+		onFocusChat(isFocusChat) {
+			this.$emit('onFocusChat', isFocusChat);
 		},
 		updateResponsive() {
 			this.isMobile = window.innerWidth < this.responsiveBreakpoint

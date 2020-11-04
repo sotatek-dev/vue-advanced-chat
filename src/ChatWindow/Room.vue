@@ -178,6 +178,8 @@
 					v-model="message"
 					@input="onChangeInput"
 					@keydown.esc="resetMessage"
+					@focus="onFocusChat(true)"
+					@blur="onFocusChat(false)"
 					@keydown.enter.exact.prevent=""
 				></textarea>
 
@@ -430,6 +432,9 @@ export default {
 	},
 
 	methods: {
+		onFocusChat(isFocusChat) {
+			this.$emit('onFocusChat', isFocusChat);
+		},
 		addNewMessage(message) {
 			this.newMessages.push(message)
 		},
