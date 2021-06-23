@@ -120,7 +120,12 @@ export default {
 	watch: {
 		rooms(newVal, oldVal) {
 			if (newVal[0] && newVal.length !== oldVal.length) {
-				this.showRoomsList = true
+				if (this.roomId) {
+					const room = newVal.find(r => r.roomId === this.roomId)
+					this.fetchRoom({ room })
+				} else {
+					this.showRoomsList = true
+				}
 			}
 		},
 
