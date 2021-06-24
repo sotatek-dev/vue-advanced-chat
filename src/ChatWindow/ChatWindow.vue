@@ -113,14 +113,24 @@ export default {
 		return {
 			room: {},
 			showRoomsList: true,
-			isMobile: false
+			isMobile: false,
+      isGetMessageRoom: false
 		}
 	},
 
 	watch: {
 		rooms(newVal, oldVal) {
 			if (newVal[0] && newVal.length !== oldVal.length) {
+				if (this.roomId) {
+					const room = newVal.find(r => r.roomId === this.roomId)
+          this.room = room;
+					if (!this.isGetMessageRoom) {
+            this.fetchRoom({ room })
+          }
+					return;
+				}
         this.showRoomsList = true
+
 			}
 		},
 
@@ -204,6 +214,7 @@ export default {
 			if (this.isMobile) this.room = {}
 		},
 		fetchRoom({ room }) {
+		  this.isGetMessageRoom = true;
 			this.room = room
 			this.fetchMessages({ reset: true })
 			if (this.isMobile) this.showRoomsList = false
